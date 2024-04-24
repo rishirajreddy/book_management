@@ -161,8 +161,6 @@ Explore and test the API endpoints using the Postman collection
      - **Body:** All book objects with details (book_details)
    - **Authentication:** Not Required
 
-### Books API:
-
 3. **Find Single Book:**
 
    - **Endpoint:** `/api/books/:id`
