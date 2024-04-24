@@ -3,7 +3,11 @@ import { User } from "../models/user.js";
 import { errorResponse } from "../services/errorHandler.js";
 import bcrypt from "bcryptjs";
 import updateUserTokens from "../utils/updateUserTokens.js";
-import { getPagination } from "../utils/helpers.js";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+  getPagination,
+} from "../utils/helpers.js";
 
 export const create = async (req, res) => {
   try {
@@ -41,8 +45,11 @@ export const find = async (req, res) => {
   try {
     //include pagination
     const pagination = req.query.pagination;
-    const { limit } = getPagination(pagination);
-    const users = await User.find().limit(limit).skip(offset);
+    const { limit, offset } = getPagination(pagination);
+    const users = await User.find()
+      .limit(limit)
+      .skip(offset)
+      .select("-password");
     return res.status(200).send(users);
   } catch (err) {
     console.log(err.message);
@@ -56,7 +63,7 @@ export const findOne = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("-password");
     if (!user) {
       return res.status(204).send(
         errorResponse({
@@ -126,6 +133,39 @@ export const destroy = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(204).send(
+        errorResponse({
+          status: 204,
+          message: "No User found with the given mail",
+        })
+      );
+    }
+
+    //compare password
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched) {
+      return res.status(400).send(
+        errorResponse({
+          status: 400,
+          message: "Invalid email or password",
+        })
+      );
+    }
+
+    //generate access_token and refresh_token
+    const access_token = generateAccessToken(user);
+    const { hashedRefreshToken } = await generateRefreshToken(user);
+    const plainUser = user.toObject();
+    delete plainUser["password"];
+    return res.status(200).send({
+      access_token,
+      refresh_token: hashedRefreshToken,
+      user: plainUser,
+    });
   } catch (err) {
     console.log(err.message);
     return res

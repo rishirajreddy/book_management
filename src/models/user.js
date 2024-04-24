@@ -18,7 +18,6 @@ export const User = mongoose.model(
     },
     password: {
       type: String,
-      select: false,
     },
     refresh_token: {
       type: String,
