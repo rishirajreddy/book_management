@@ -27,9 +27,9 @@ Request body validations are implemented using the Joi npm package for both User
 
 ## Postman Collection
 
-Explore and test the API endpoints using the Postman collection: [Postman Collection](https://api.postman.com/collections/25041489-58efd87c-2af4-46ce-add0-9d3e73981086?access_key=PMAT-01HW7WQQHBYWDCYBE9EAN08MRX)
+Explore and test the API endpoints using the Postman collection
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://api.postman.com/collections/25041489-58efd87c-2af4-46ce-add0-9d3e73981086?access_key=PMAT-01HW7WQQHBYWDCYBE9EAN08MRX)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/25041489-58efd87c-2af4-46ce-add0-9d3e73981086?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D25041489-58efd87c-2af4-46ce-add0-9d3e73981086%26entityType%3Dcollection%26workspaceId%3D597eb560-d46d-465f-8638-e3b72abd08aa)
 
 ## APIs
 
