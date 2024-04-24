@@ -56,7 +56,73 @@ Explore and test the API endpoints using the Postman collection: [Postman Collec
      - **Body:** User object with user details (id, name, email)
    - **Authentication:** Required (JWT Token)
 
-...
+### Users API:
+
+3. **Create User:**
+
+   - **Endpoint:** `/api/users`
+   - **Method:** POST
+   - **Description:** Create a user.
+   - **Request Body:**
+     ```json
+     {
+       "email": "star@mail.com",
+       "phone": "6760555412",
+       "country_code": "+91",
+       "password": "12345678"
+     }
+     ```
+   - **Response:**
+     - **Status Code:** 200 OK
+     - **Body:** User object with user details (access_token, refresh_token, user_details)
+   - **Authentication:** Not Required
+
+4. **Update User:**
+
+   - **Endpoint:** `/api/users/:id`
+   - **Method:** PUT
+   - **Description:** Update a user.
+   - **Parameters:**
+     - `id`: User ID
+   - **Request Body:**
+     ```json
+     {
+       "email": "star@mail.com",
+       "phone": "6760555412",
+       "country_code": "+91"
+     }
+     ```
+   - **Response:**
+     - **Status Code:** 201 OK
+     - **Body:** User object with user details (user_details)
+   - **Authentication:** Required (JWT Token: Authenticated User can update only their details)
+
+5. **Delete User:**
+
+   - **Endpoint:** `/api/users/:id`
+   - **Method:** DELETE
+   - **Description:** Delete a user.
+   - **Parameters:**
+     - `id`: User ID
+   - **Response:**
+     - **Status Code:** 200 OK
+     - **Body:** User object with user details (user_details)
+   - **Authentication:** Required (JWT Token: Authenticated User can delete only their data)
+
+6. **Login User:**
+   - **Endpoint:** `/api/users/auth/login`
+   - **Method:** POST
+   - **Description:** User login.
+   - **Request Body:**
+     ```json
+     {
+       "email": "star@mail.com",
+       "password": "12345678"
+     }
+     ```
+   - **Response:**
+     - **Status Code:** 200 OK
+     - **Body:** User object with user details (access_token, refresh_token, user_details)
 
 ### Books API:
 
@@ -95,4 +161,49 @@ Explore and test the API endpoints using the Postman collection: [Postman Collec
      - **Body:** All book objects with details (book_details)
    - **Authentication:** Not Required
 
-...
+### Books API:
+
+3. **Find Single Book:**
+
+   - **Endpoint:** `/api/books/:id`
+   - **Method:** GET
+   - **Description:** Find a book by ID.
+   - **Parameters:**
+     - `id`: Book ID
+   - **Response:**
+     - **Status Code:** 200 OK
+     - **Body:** Book object with details (book_details)
+   - **Authentication:** Not Required
+
+4. **Update Book:**
+
+   - **Endpoint:** `/api/books/:id`
+   - **Method:** PUT
+   - **Description:** Update a book.
+   - **Parameters:**
+     - `id`: Book ID
+   - **Request Body:**
+     ```json
+     {
+       "title": "Harry Potter",
+       "author": "JKRowling",
+       "publisher": "HBO",
+       "publication_year": "2000",
+       "genre": "fantasy"
+     }
+     ```
+   - **Response:**
+     - **Status Code:** 201 OK
+     - **Body:** Book object with details (book_details)
+   - **Authentication:** Required (JWT Token of the User)
+
+5. **Delete Book:**
+   - **Endpoint:** `/api/books/:id`
+   - **Method:** DELETE
+   - **Description:** Delete a book.
+   - **Parameters:**
+     - `id`: Book ID
+   - **Response:**
+     - **Status Code:** 200 OK
+     - **Body:** Book object with details (book_details)
+   - **Authentication:** Required (JWT Token of the User)
