@@ -56,8 +56,6 @@ Explore and test the API endpoints using the Postman collection
      - **Body:** User object with user details (id, name, email)
    - **Authentication:** Required (JWT Token)
 
-### Users API:
-
 3. **Create User:**
 
    - **Endpoint:** `/api/users`
